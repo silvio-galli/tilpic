@@ -30,5 +30,8 @@ button {
 }
 .empty {
   background-image: none !important;
-  background-color: #aaa;
+  background-color: lightblue;
+}
+.completed {
+  pointer-events: none;
 }

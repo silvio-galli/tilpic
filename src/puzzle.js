@@ -1,15 +1,12 @@
-function Puzzle( n = 3 ) {
+function Puzzle( n ) {
   this.level = n; // the higher the number, the higher the difficult
                   // 3,4,5 will be the different levels
   this.img = '../img/husky.png',
   this.board = [];
   // collect the tiles properties inside an array of objects
   this.tiles = [];
-  // the cursor vale is an object that stores its coordinates
-  this.cursor = {
-    y: this.level - 1,
-    x: this.level - 1,
-  }
+  // true when the tiles has been shuffled
+  this.shuffled = false;
 }
 
 
@@ -24,7 +21,7 @@ Puzzle.prototype.createTiles = function () {
     for (var col = 0; col < this.level; col++) {
       // here is building of the anonymous 'tile' object 
       this.tiles.push( {
-        name: row + "-" + col,
+        //name: row + "-" + col, this seems to be useless; I'd rather use the array index
         // starting position of the tile onto the board
         y: row,
         x: col,
