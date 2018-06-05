@@ -1,6 +1,7 @@
 function Puzzle( n = 3 ) {
   this.level = n; // the higher the number, the higher the difficult
                   // 3,4,5 will be the different levels
+  this.img = '../img/husky.png',
   this.board = [];
   // collect the tiles properties inside an array of objects
   this.tiles = [];
@@ -31,11 +32,12 @@ Puzzle.prototype.createTiles = function () {
         currentY: row,
         currentX: col,
         // tiles are squares we store the size of its side
-        side: 600 / this.level,
+        side: 500 / this.level,
         // bgY and bgX are used to assign the correct portion of the
         // image as a background of the tile
-        bgY: ( 600 / this.level ) * (row === 0 ? 0 : -row), 
-        bgX: ( 600 / this.level ) * (col === 0 ? 0 : -col),
+        bg: this.img,
+        bgY: ( 500 / this.level ) * (row === 0 ? 0 : -row), 
+        bgX: ( 500 / this.level ) * (col === 0 ? 0 : -col),
       } );
     }
   }
@@ -44,6 +46,9 @@ Puzzle.prototype.createTiles = function () {
 // shuffleTiles() method shuffles tiles coordinates
 // so that they will be randomly dislpayed on the game board
 Puzzle.prototype.shuffleTiles = function () {
+  // before shuffle take away the last tile
+  // to create an empty space we use to move the tiles
+  this.lastTile = this.tiles.pop();
   // retrieve starting coordinates from the object
   var startingTilesCoordinates = this.tiles.map( tile => [ tile.x, tile.y ] );
   var shuffledTilesCoordinates = [];
@@ -59,6 +64,10 @@ Puzzle.prototype.shuffleTiles = function () {
     this.tiles[ i ].currentY = shuffledTilesCoordinates[ i ][ 0 ];
     this.tiles[ i ].currentX = shuffledTilesCoordinates[ i ][ 1 ];
   }
+
+  // push lastTile into this.tiles as an empty tile
+  this.lastTile.bg = "none";
+  this.tiles.push( this.lastTile );
 };
 
 function selectTilesPerRow( tiles, index ) {

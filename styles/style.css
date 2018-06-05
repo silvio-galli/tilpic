@@ -3,9 +3,17 @@
   padding: 0;
 }
 
+button {
+  margin-right: 2%;
+}
+#controls {
+  margin: 15px auto;
+  text-align: center;
+}
 #board {
-  width: 630px;
-  height: 630px;
+  width: 530px;
+  height: 530px;
+  margin: 0 auto;
   box-sizing: content-box;
   border: 3px solid #000;
   display: flex;
@@ -15,4 +23,12 @@
 }
 .tile {
   box-sizing: border-box;
+  box-shadow: 0 0 5px #ccc;
+}
+.tile:hover {
+  box-shadow: 0 0 5px #000;
+}
+.empty {
+  background-image: none !important;
+  background-color: #aaa;
 }
