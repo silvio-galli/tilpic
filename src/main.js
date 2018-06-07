@@ -1,7 +1,8 @@
-var puzzle;
+var puzzle = new Puzzle();
 
 // ----- hide controls and board
 function hideElementsAtStart() {
+  $('.levels').hide();
   $('#shuffle').hide();
   $('#reset').hide();
   $('#board').hide();
@@ -62,20 +63,30 @@ function doEmpty() {
 // ----- here the events ---------------
 $(document).ready( function () {
 
+  // select the pic
+  $('.img img').click( function() {
+    console.log(this);
+    puzzle.img += $(this).attr('src');
+    $('.pics').toggle();
+    $('.levels').toggle();
+  } );
+
+  // select the level
   $('.level').click( function() {
-    puzzle = new Puzzle( $(this).val() );
+    puzzle.level =  $(this).val();
     $('.levels').toggle();
     init();
     $('#shuffle').show();
   } );
 
+  // shuffle the tiles
   $('#shuffle').click( function() {
     // be sure that the user choose a level
     if ( puzzle === undefined ) {
       console.log( "Choose a level before shuffling..." )
     }
     // Fake board to complete the game easily
-    else if (puzzle.level = "2") {
+    else if (puzzle.level === "2") {
       puzzle.board = [
         puzzle.tiles[0],
         puzzle.tiles[1],
@@ -107,8 +118,13 @@ $(document).ready( function () {
     }
   } );
 
+  $('#reset').click(function() {
+    location.reload();
+  } );
+
 } ); // $(document).ready ends here -->
 
+// -------- PLAY ----------------------
 // -------- moving the tiles -------------
 $( document ).on( "click", ".tile", function() {
   if ( $( '.tile' ).length > 0 && puzzle.shuffled ) {

@@ -2,6 +2,36 @@
   margin: 0;
   padding: 0;
 }
+/* PICS */
+.pics {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(125,125,125,0.5);
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.pics figure {
+  width: 35%;
+  padding: 15px;
+  background: #fefefe;
+  color: #000;
+  box-shadow: 0 0 10px #666;
+}
+.pics figure:hover {
+  box-shadow: 0 0 10px #000; 
+}
+.pics img {
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
 /* BUTTONS */
 .levels {
   position: absolute;
@@ -35,18 +65,18 @@
 #board {
   margin: 0 auto;
   border: 2px solid #000;
+  background: #fff;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  background: #fff;
 }
 .tile {
   box-sizing: border-box;
   box-shadow: 0 0 5px #ccc;
 }
 .tile:hover {
-  box-shadow: inset 0 0 15px #000;
+  box-shadow: inset 0 0 5px #000;
 }
 .empty {
   background-image: none !important;
@@ -64,6 +94,13 @@
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  .pics {
+    justify-content: center;
+  }
+  .pics figure {
+    width: 250px;
+    margin: 15px 5%;
+  }
   .levels .btn {
     width: 40%;
   }
@@ -71,7 +108,13 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-
+  .pics {
+    justify-content: center;
+  }
+  .pics figure {
+    width: 250px;
+    margin: 15px 8%;
+  }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
