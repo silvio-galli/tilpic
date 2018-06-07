@@ -2,13 +2,15 @@ var puzzle = new Puzzle();
 
 // ----- hide controls and board
 function hideElementsAtStart() {
+  $('.message').hide();
+  $('#splash').hide();
+  $('.start-button').hide();
+  $('.pics').hide();
   $('.levels').hide();
   $('#shuffle').hide();
   $('#reset').hide();
   $('#board').hide();
 }
-
-hideElementsAtStart();
 
 // ------- here starts the game
 function init() {
@@ -17,7 +19,7 @@ function init() {
   puzzle.createTiles();   // populate puzzle.tiles
   puzzle.updateBoard();   // update puzzle.board
   buildBoard();           // build html for board
-  $('#board').show();     // display the board to the user
+  $('#board').fadeIn(1500);     // display the board to the user
 }
 
 // ---- DISPLAYS BOARD -----------------------------------
@@ -60,21 +62,31 @@ function doEmpty() {
   $('#' + emptyTileId).toggleClass('empty');
 }
 
+hideElementsAtStart();
+
+// ----- JQuery stuff
 // ----- here the events ---------------
 $(document).ready( function () {
 
+  $('#splash').delay(200).fadeIn();
+  $('.start-button').delay(800).fadeIn(1000);
+
+  $('.start-button').click(function(){
+    $('#splash').delay(200).fadeOut();
+    $('.pics').delay(800).fadeIn(1500, 'swing');
+  } );
+
   // select the pic
   $('.img img').click( function() {
-    console.log(this);
     puzzle.img += $(this).attr('src');
-    $('.pics').toggle();
-    $('.levels').toggle();
+    $('.pics').fadeOut();
+    $('.levels').delay(600).fadeIn();
   } );
 
   // select the level
   $('.level').click( function() {
     puzzle.level =  $(this).val();
-    $('.levels').toggle();
+    $('.levels').fadeOut();
     init();
     $('#shuffle').show();
   } );
@@ -86,6 +98,7 @@ $(document).ready( function () {
       console.log( "Choose a level before shuffling..." )
     }
     // Fake board to complete the game easily
+    // level only for development
     else if (puzzle.level === "2") {
       puzzle.board = [
         puzzle.tiles[0],
@@ -110,9 +123,9 @@ $(document).ready( function () {
     } else {
       puzzle.shuffleTiles();
       puzzle.shuffled = true;
-      puzzle.updateBoard();  // update puzzle.board after shuffling
-      buildBoard();           // build html for board
-      $('#board').show();     // display the board to the user
+      puzzle.updateBoard();
+      buildBoard();
+      $('#board').fadeIn();
       doEmpty();
       $('#reset').show();
     }
@@ -127,6 +140,10 @@ $(document).ready( function () {
 // -------- PLAY ----------------------
 // -------- moving the tiles -------------
 $( document ).on( "click", ".tile", function() {
+  if ( puzzle.shuffled === false ) {
+    $('#shuffle-please').fadeIn();
+    $('#shuffle-please').delay(2500).fadeOut();
+  }
   if ( $( '.tile' ).length > 0 && puzzle.shuffled ) {
     var thisY = puzzle.tiles[this.id].currentY;
     var thisX = puzzle.tiles[this.id].currentX;
@@ -146,12 +163,19 @@ $( document ).on( "click", ".tile", function() {
       // CHECK IF PUZZLE COMPLETED
       if ( puzzle.checkCompleted() ) {
         console.log( "YOU DID!!!!" )
-        $( '.tile' ).addClass( 'completed' );
-        // DO SOMTHING WHEN THE PUZZLE IS COMPLETED
-        return;
+        $('.tile' ).addClass( 'completed' );
+        $('.empty').removeClass('empty');
+        $('#shuffle').toggle();
+        $('#reset').toggle();
+        $('#board').delay(600).fadeOut();
+        $('#completed').delay(1200).fadeIn();
+        $('#completed').delay(2500).fadeOut();
+        $('.pics').delay(3100).fadeIn();
       }
     } else {
       console.log( "The tile you clicked is NOT adiacent to empty." );
+      $('#incorrect-tile').fadeIn();
+      $('#incorrect-tile').delay(2500).fadeOut();
     }
 
   } else {
