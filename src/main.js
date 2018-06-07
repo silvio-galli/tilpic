@@ -67,13 +67,35 @@ $(document).ready( function () {
     $('.levels').toggle();
     init();
     $('#shuffle').show();
-    $('#reset').show();
   } );
 
   $('#shuffle').click( function() {
     // be sure that the user choose a level
     if ( puzzle === undefined ) {
       console.log( "Choose a level before shuffling..." )
+    }
+    // Fake board to complete the game easily
+    else if (puzzle.level = "2") {
+      puzzle.board = [
+        puzzle.tiles[0],
+        puzzle.tiles[1],
+        puzzle.tiles[2],
+        puzzle.tiles[3]
+      ];
+      puzzle.tiles[0].currentY = 0, puzzle.tiles[0].currentX = 0; 
+      puzzle.tiles[1].currentY = 0, puzzle.tiles[1].currentX = 1;
+      puzzle.tiles[2].currentY = 1, puzzle.tiles[2].currentX = 0;
+      puzzle.tiles[3].currentY = 1, puzzle.tiles[3].currentX = 1;
+
+      puzzle.lastTile = puzzle.tiles[3];
+
+      puzzle.shuffled = true;
+      
+      puzzle.updateBoard();  // update puzzle.board after shuffling
+      buildBoard();          // build html for board
+      $('#board').show();    // display the shuffled board to the user
+      doEmpty();
+      $('#reset').show();
     } else {
       puzzle.shuffleTiles();
       puzzle.shuffled = true;
@@ -81,6 +103,7 @@ $(document).ready( function () {
       buildBoard();           // build html for board
       $('#board').show();     // display the board to the user
       doEmpty();
+      $('#reset').show();
     }
   } );
 
