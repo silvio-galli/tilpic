@@ -1,15 +1,27 @@
 var puzzle;
 
+// ----- hide controls and board
+function hideElementsAtStart() {
+  $('#shuffle').hide();
+  $('#reset').hide();
+  $('#board').hide();
+}
+
+hideElementsAtStart();
+
 // ------- here starts the game
 function init() {
-  puzzle.createTiles();  // populate puzzle.tiles
-  puzzle.updateBoard();  // update puzzle.board
-  displayBoard();        // display the initial board to the user
+  $('#board').css('width', puzzle.screenWidth);
+  $('#board').css('height', puzzle.screenWidth);
+  puzzle.createTiles();   // populate puzzle.tiles
+  puzzle.updateBoard();   // update puzzle.board
+  buildBoard();           // build html for board
+  $('#board').show();     // display the board to the user
 }
 
 // ---- DISPLAYS BOARD -----------------------------------
 // ---- (use after updating the board to displays changes)
-function displayBoard() {
+function buildBoard() {
   var html = '';
   for ( var row = 0; row < puzzle.level; row++ ) {
     for ( var col = 0; col < puzzle.level; col++ ) {
@@ -52,7 +64,10 @@ $(document).ready( function () {
 
   $('.level').click( function() {
     puzzle = new Puzzle( $(this).val() );
+    $('.levels').toggle();
     init();
+    $('#shuffle').show();
+    $('#reset').show();
   } );
 
   $('#shuffle').click( function() {
@@ -63,7 +78,8 @@ $(document).ready( function () {
       puzzle.shuffleTiles();
       puzzle.shuffled = true;
       puzzle.updateBoard();  // update puzzle.board after shuffling
-      displayBoard();        // display the shuffled board to the user
+      buildBoard();           // build html for board
+      $('#board').show();     // display the board to the user
       doEmpty();
     }
   } );
@@ -84,9 +100,11 @@ $( document ).on( "click", ".tile", function() {
       puzzle.tiles[this.id].currentX = puzzle.lastTile.currentX;
       puzzle.lastTile.currentY = thisY;
       puzzle.lastTile.currentX = thisX;
-      puzzle.updateBoard();  // update puzzle.board after shuffling
-      displayBoard();        // display the shuffled board to the user
+      puzzle.updateBoard();   // update puzzle.board after shuffling
+      buildBoard();           // build html for board
       doEmpty();
+      
+      // CHECK IF PUZZLE COMPLETED
       if ( puzzle.checkCompleted() ) {
         console.log( "YOU DID!!!!" )
         $( '.tile' ).addClass( 'completed' );

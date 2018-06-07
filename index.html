@@ -10,20 +10,39 @@
   <script src="lib/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="lib/bootstrap-4.1.1-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="fontawesome-all.css">
   <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <div class="container">
-    <div id="controls">
-      <button type="button" class="btn btn-secondary level" value="2">Dev button</button>
-      <button type="button" class="btn btn-secondary level" value="3">Level 1</button>
-      <button type="button" class="btn btn-secondary level" value="4">Level 2</button>
-      <button type="button" class="btn btn-secondary level" value="5">Level 3</button>
-      <button type="button" id="shuffle" class="btn btn-primary">Shuffle</button>
+      
+    <div class="levels">
+      <button type="button" class="btn btn-primary level" value="2">
+        <i class="fas fa-th"></i><br>4 tiles
+      </button>
+      <button type="button" class="btn btn-primary level" value="3">
+        <i class="fas fa-th"></i><br>9 tiles
+      </button>
+      <button type="button" class="btn btn-primary level" value="4">
+        <i class="fas fa-th"></i><br>16 tiles
+      </button>
+      <button type="button" class="btn btn-primary level" value="5">
+        <i class="fas fa-th"></i><br>25 tiles
+      </button>
     </div>
-    
-    <div id="board"></div>
-  </div>
+  
+  </div> <!-- container ends here -->
+
+  <div id="board"></div>
+  
+  <div class="container">
+
+    <div class="controls">
+      <button type="button" id="shuffle" class="btn btn-primary">Shuffle</button>
+      <button type="button" id="reset" class="btn btn-danger">Reset</button>
+    </div>
+
+  </div> <!-- container ends here -->
   
   <script src="src/puzzle.js"></script>
   <script src="src/main.js"></script>
