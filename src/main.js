@@ -16,10 +16,10 @@ function hideElementsAtStart() {
 function init() {
   $('#board').css('width', puzzle.screenWidth);
   $('#board').css('height', puzzle.screenWidth);
-  puzzle.createTiles();   // populate puzzle.tiles
-  puzzle.updateBoard();   // update puzzle.board
-  buildBoard();           // build html for board
-  $('#board').fadeIn(1500);     // display the board to the user
+  puzzle.createTiles();       // populate puzzle.tiles
+  puzzle.updateBoard();       // update puzzle.board
+  buildBoard();               // build html for board
+  $('#board').fadeIn(1500);   // display the board to the user
 }
 
 // ---- DISPLAYS BOARD -----------------------------------
@@ -138,7 +138,7 @@ $(document).ready( function () {
 
   // BACK TO PICTURES button in #completed modal
   $('#back-to-pics').click(function() {
-    console.log(this);
+    $('#reset').toggle();
     $('#board').fadeOut();
     $('.pics').fadeIn();
   } );
@@ -178,12 +178,7 @@ $( document ).on( "click", ".tile", function() {
         $('.tile' ).addClass( 'completed' );
         $('.empty').removeClass('empty');
         $('#shuffle').toggle();
-        //$('#reset').toggle();
         $('#completed').modal('toggle');
-        // $('#board').delay(600).fadeOut();
-        // $('#completed').delay(1200).fadeIn();
-        // $('#completed').delay(2500).fadeOut();
-        // $('.pics').delay(3100).fadeIn();
       }
     } else {
       // ...NO, YOU CLICKED THE WRONG TILE
