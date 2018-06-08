@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TilPic</title>
-  <!-- JS files -->
-  <script src="lib/jquery/jquery-3.3.1.js"></script>
-  <script src="lib/bootstrap-4.1.1-dist/js/bootstrap.min.js"></script>
+
   <!-- stylesheets -->
-  <link rel="stylesheet" href="lib/bootstrap-4.1.1-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="fontawesome-all.css">
-  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
   <div class="container">
@@ -22,13 +20,13 @@
       <h1>You can move only the tile adiacent to the empty one.</h1>
     </div>
     <div id="completed" class="message">
-        <h1><i class="fas fa-thumbs-up"></i><br> <small>Well Done!!!</small></h1>
-      </div>
+      <h1><i class="fas fa-thumbs-up"></i><br> <small>Well Done!!!</small></h1>
+    </div>
 
     <!-- STARTING SPLASH SCREEN -->
     <div id="splash">
       <div>
-        <img src="img/tilpic-logo.png" alt="splash screen image - tilpic logo">
+        <img src="/img/tilpic-logo.png" alt="splash screen image - tilpic logo">
       </div>
       <div class="start-button">Start</div>
     </div>
@@ -36,22 +34,22 @@
     <div class="pics">
       <!-- pic 01 -->
       <figure class="img">
-        <img src="img/husky.png" alt="Husky image" value="husky.png">
+        <img src="/img/husky.png" alt="Husky image" value="husky.png">
         <figcaption>&nbsp;</figcaption>
       </figure>
       <!-- pic 02 -->
       <figure class="img">
-        <img src="img/batman.jpg" alt="Batman image" value="batman.jpg">
+        <img src="/img/batman.jpg" alt="Batman image" value="batman.jpg">
         <figcaption>&nbsp;</figcaption>
       </figure>
       <!-- pic 03 -->
       <figure class="img">
-        <img src="img/lion.png" alt="Lion image" value="lion.png">
+        <img src="/img/lion.png" alt="Lion image" value="lion.png">
         <figcaption>&nbsp;</figcaption>
       </figure>
       <!-- pic 04 -->
       <figure class="img">
-        <img src="img/berlin.png" alt="Berlin image" value="berlin.png">
+        <img src="/img/berlin.png" alt="Berlin image" value="berlin.png">
         <figcaption>&nbsp;</figcaption>
       </figure>
     </div>
@@ -84,8 +82,12 @@
     </div>
 
   </div> <!-- container ends here -->
-  
-  <script src="src/puzzle.js"></script>
-  <script src="src/main.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+  <script src="/src/puzzle.js"></script>
+  <script src="/src/main.js"></script>
 </body>
 </html>

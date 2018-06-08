@@ -1,7 +1,7 @@
 function Puzzle( n = 3 ) {
   this.level = n; // the higher the number, the higher the difficult
                   // 3,4,5 will be the different levels
-  this.img = '../',
+  this.img = '',
   this.board = [];
   // collect the tiles properties inside an array of objects
   this.tiles = [];
