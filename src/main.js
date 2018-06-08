@@ -131,33 +131,45 @@ $(document).ready( function () {
     }
   } );
 
+  // RESET button
   $('#reset').click(function() {
     location.reload();
   } );
 
+  // BACK TO PICTURES button in #completed modal
+  $('#back-to-pics').click(function() {
+    console.log(this);
+    $('#board').fadeOut();
+    $('.pics').fadeIn();
+  } );
+
 } ); // $(document).ready ends here -->
 
-// -------- PLAY ----------------------
-// -------- moving the tiles -------------
+// -------- PLAY -------------------------------
+// -------- MOVING THE TILES AROUND -------------
 $( document ).on( "click", ".tile", function() {
-  if ( puzzle.shuffled === false ) {
-    $('#shuffle-please').fadeIn();
-    $('#shuffle-please').delay(2500).fadeOut();
-  }
-  if ( $( '.tile' ).length > 0 && puzzle.shuffled ) {
+  if ( !puzzle.shuffled ) {
+
+    console.log( 'You cannot play before you shuffling the tiles ;-)' );
+    $('#shuffle-please').modal('toggle');
+  
+  } else if ( $( '.tile' ).length > 0 && puzzle.shuffled ) {
+    // CHECK IF CLICKED TILE IS ADIACENT TO EMPTY ONE...
     var thisY = puzzle.tiles[this.id].currentY;
     var thisX = puzzle.tiles[this.id].currentX;
     var diffY = Math.abs( thisY - puzzle.lastTile.currentY );
     var diffX = Math.abs( thisX - puzzle.lastTile.currentX );
     var diff = diffY + "," + diffX;
     if ( diff === '0,1' || diff === '1,0' ) {
+      
+      // ...YES, THEN SWAP THE TILES
       console.log( "The tile you clicked IS adiacent to empty. YOU CAN SWITCH TILES!!!" );
       puzzle.tiles[this.id].currentY = puzzle.lastTile.currentY;
       puzzle.tiles[this.id].currentX = puzzle.lastTile.currentX;
       puzzle.lastTile.currentY = thisY;
       puzzle.lastTile.currentX = thisX;
-      puzzle.updateBoard();   // update puzzle.board after shuffling
-      buildBoard();           // build html for board
+      puzzle.updateBoard();
+      buildBoard();
       doEmpty();
       
       // CHECK IF PUZZLE COMPLETED
@@ -166,20 +178,19 @@ $( document ).on( "click", ".tile", function() {
         $('.tile' ).addClass( 'completed' );
         $('.empty').removeClass('empty');
         $('#shuffle').toggle();
-        $('#reset').toggle();
-        $('#board').delay(600).fadeOut();
-        $('#completed').delay(1200).fadeIn();
-        $('#completed').delay(2500).fadeOut();
-        $('.pics').delay(3100).fadeIn();
+        //$('#reset').toggle();
+        $('#completed').modal('toggle');
+        // $('#board').delay(600).fadeOut();
+        // $('#completed').delay(1200).fadeIn();
+        // $('#completed').delay(2500).fadeOut();
+        // $('.pics').delay(3100).fadeIn();
       }
     } else {
+      // ...NO, YOU CLICKED THE WRONG TILE
       console.log( "The tile you clicked is NOT adiacent to empty." );
-      $('#incorrect-tile').fadeIn();
-      $('#incorrect-tile').delay(2500).fadeOut();
+      $('#incorrect-tile').modal('toggle');
     }
 
-  } else {
-    console.log( 'You cannot play before you shuffling the tiles ;-)' );
   }
 });
 
